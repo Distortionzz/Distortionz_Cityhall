@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Distortionz City Hall</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div id="app" class="hidden">
+        <div class="backdrop"></div>
+
+        <main class="cityhall-shell">
+            <aside class="sidebar">
+                <div class="seal">
+                    <div class="seal-icon">⚖</div>
+                    <div>
+                        <p class="eyebrow" id="badgeText">Official Civic Portal</p>
+                        <h1 id="headerTitle">San Andreas City Hall</h1>
+                        <p id="headerSubtitle">Government Services Division</p>
+                    </div>
+                </div>
+
+                <div class="citizen-card">
+                    <p class="card-label">Citizen Profile</p>
+                    <h2 id="citizenName">Unknown Citizen</h2>
+                    <div class="profile-row">
+                        <span>Citizen ID</span>
+                        <strong id="citizenId">Unknown</strong>
+                    </div>
+                    <div class="profile-row">
+                        <span>Current Job</span>
+                        <strong id="currentJob">Unemployed</strong>
+                    </div>
+                    <div class="profile-row">
+                        <span>Grade</span>
+                        <strong id="currentGrade">Civilian</strong>
+                    </div>
+                </div>
+
+                <nav class="tabs">
+                    <button class="tab active" data-tab="identity">
+                        <span>Identification</span>
+                        <small>IDs & licenses</small>
+                    </button>
+                    <button class="tab" data-tab="employment">
+                        <span>Employment</span>
+                        <small>Starter jobs</small>
+                    </button>
+                    <button class="tab" data-tab="permits">
+                        <span>Permits</span>
+                        <small>Government permits</small>
+                    </button>
+                    <button class="tab" data-tab="records">
+                        <span>Records</span>
+                        <small>Citizen records</small>
+                    </button>
+                </nav>
+
+                <p class="footer-note" id="footerNote">
+                    All services are logged and processed through city records.
+                </p>
+            </aside>
+
+            <section class="content">
+                <header class="topbar">
+                    <div>
+                        <p class="eyebrow">Public Service Counter</p>
+                        <h2 id="sectionTitle">Identification Services</h2>
+                    </div>
+
+                    <button id="closeBtn" class="close-btn">×</button>
+                </header>
+
+                <section id="identityPanel" class="panel active">
+                    <div class="panel-grid" id="identityGrid"></div>
+                </section>
+
+                <section id="employmentPanel" class="panel">
+                    <div class="panel-grid" id="jobsGrid"></div>
+                </section>
+
+                <section id="permitsPanel" class="panel">
+                    <div class="panel-grid" id="permitsGrid"></div>
+                </section>
+
+                <section id="recordsPanel" class="panel">
+                    <div class="records-layout">
+                        <div class="records-list" id="recordsList"></div>
+
+                        <div class="license-summary">
+                            <p class="card-label">License Status</p>
+                            <div id="licenseSummary"></div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </main>
+
+        <div id="confirmModal" class="modal hidden">
+            <div class="modal-card">
+                <p class="eyebrow">Confirm Service</p>
+                <h3 id="confirmTitle">Confirm</h3>
+                <p id="confirmDescription">Are you sure?</p>
+
+                <div class="fee-box">
+                    <span>Government Fee</span>
+                    <strong id="confirmFee">$0</strong>
+                </div>
+
+                <div class="modal-actions">
+                    <button id="cancelConfirm" class="secondary-btn">Cancel</button>
+                    <button id="acceptConfirm" class="primary-btn">Proceed</button>
+                </div>
+
+                <p id="modalError" class="modal-error"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

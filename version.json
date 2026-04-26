@@ -1,0 +1,6 @@
+{
+    "resource": "distortionz_cityhall",
+    "version": "1.0.0",
+    "changelog": "Initial release. Premium government City Hall UI with identity services, licenses, permits, starter job selection, citizen records, protected City Hall ped, ox_target support, Qbox/QBCore compatibility, and Distortionz Notify support.",
+    "download": "https://github.com/Distortionzz/Distortionz_Cityhall"
+}
