@@ -222,27 +222,6 @@ RegisterNUICallback('purchaseService', function(data, cb)
     end
 end)
 
-RegisterNUICallback('selectJob', function(data, cb)
-    local result = lib.callback.await('distortionz_cityhall:server:selectJob', false, data)
-
-    if not result then
-        cb({
-            success = false,
-            message = 'Employment request failed.'
-        })
-        return
-    end
-
-    cb(result)
-
-    if result.success then
-        Notify(result.message or 'Employment updated.', 'success')
-        OpenCityHall()
-    else
-        Notify(result.message or 'Employment update failed.', result.status or 'error')
-    end
-end)
-
 RegisterNUICallback('refreshData', function(_, cb)
     local data = lib.callback.await('distortionz_cityhall:server:getCityHallData', false)
 

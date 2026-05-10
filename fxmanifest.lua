@@ -2,8 +2,8 @@ fx_version 'cerulean'
 game 'gta5'
 
 author 'Distortionz'
-description 'Distortionz City Hall - Premium government services, licenses, permits, jobs, and records'
-version '1.0.0'
+description 'Distortionz City Hall - Premium government services, licenses, permits, and records'
+version '1.0.2'
 
 lua54 'yes'
 

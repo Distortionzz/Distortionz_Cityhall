@@ -11,11 +11,13 @@ const citizenId = document.getElementById('citizenId');
 const currentJob = document.getElementById('currentJob');
 const currentGrade = document.getElementById('currentGrade');
 
+const brandVersion = document.getElementById('brandVersion');
+const brandLink = document.getElementById('brandLink');
+
 const sectionTitle = document.getElementById('sectionTitle');
 
 const identityGrid = document.getElementById('identityGrid');
 const permitsGrid = document.getElementById('permitsGrid');
-const jobsGrid = document.getElementById('jobsGrid');
 const recordsList = document.getElementById('recordsList');
 const licenseSummary = document.getElementById('licenseSummary');
 
@@ -87,6 +89,15 @@ function openUI(data) {
     headerSubtitle.textContent = text.headerSubtitle || 'Government Services Division';
     footerNote.textContent = text.footerNote || 'All services are logged and processed through city records.';
 
+    const meta = data.meta || {};
+    brandVersion.textContent = meta.version ? `v${meta.version}` : '';
+    if (meta.repo) {
+        brandLink.href = meta.repo;
+        brandLink.style.display = '';
+    } else {
+        brandLink.style.display = 'none';
+    }
+
     const citizen = data.citizen || {};
     const job = citizen.currentJob || {};
 
@@ -97,7 +108,6 @@ function openUI(data) {
 
     renderIdentity();
     renderPermits();
-    renderJobs();
     renderRecords();
 
     showTab('identity');
@@ -148,34 +158,6 @@ function renderPermits() {
                 title: service.label,
                 description: service.description,
                 fee: service.price
-            })
-        }));
-    });
-}
-
-function renderJobs() {
-    jobsGrid.innerHTML = '';
-
-    const current = state.citizen && state.citizen.currentJob ? state.citizen.currentJob.name : '';
-
-    (state.jobs || []).forEach((job) => {
-        const isCurrent = current === job.name;
-
-        jobsGrid.appendChild(createServiceCard({
-            title: job.label,
-            description: job.description,
-            icon: job.icon,
-            price: job.salary ? `Salary: $${job.salary}` : 'No salary',
-            active: isCurrent,
-            priceIsText: true,
-            buttonText: isCurrent ? 'Current Job' : 'Select Job',
-            disabled: isCurrent,
-            onClick: () => openConfirm({
-                type: 'job',
-                jobName: job.name,
-                title: job.label,
-                description: job.description,
-                fee: 0
             })
         }));
     });
@@ -258,7 +240,6 @@ function showTab(tabName) {
 
     const titleMap = {
         identity: 'Identification Services',
-        employment: 'Employment Services',
         permits: 'Permits & Applications',
         records: 'Citizen Records'
     };
@@ -269,11 +250,6 @@ function showTab(tabName) {
 
     if (panel) {
         panel.classList.add('active');
-    }
-
-    const employmentGrid = document.querySelector('#employmentPanel .panel-grid');
-    if (employmentGrid) {
-        employmentGrid.scrollTop = 0;
     }
 }
 
@@ -312,12 +288,6 @@ async function submitPendingAction() {
             result = await postNui('purchaseService', {
                 serviceType: pendingAction.serviceType,
                 serviceId: pendingAction.serviceId
-            });
-        }
-
-        if (pendingAction.type === 'job') {
-            result = await postNui('selectJob', {
-                jobName: pendingAction.jobName
             });
         }
 

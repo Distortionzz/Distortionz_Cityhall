@@ -204,6 +204,50 @@ h1 {
     padding-top: 14px;
 }
 
+.brand-footer {
+    width: 100%;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(212, 170, 98, 0.14);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.brand-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.brand-name {
+    color: rgba(247, 242, 232, 0.80);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.brand-version {
+    color: #f4d28b;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.brand-link {
+    color: rgba(212, 170, 98, 0.80);
+    font-size: 11px;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: color 120ms ease;
+}
+
+.brand-link:hover {
+    color: #f4d28b;
+    text-decoration: underline;
+}
+
 .content {
     padding: 34px 40px 34px;
     min-width: 0;

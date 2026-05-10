@@ -267,41 +267,6 @@ local function BuildLicenseItemMetadata(src, service)
     }
 end
 
-local function SetPlayerJob(src, jobName, grade)
-    local player = GetPlayer(src)
-    grade = tonumber(grade) or 0
-
-    if not player then return false end
-
-    if GetResourceState('qbx_core') == 'started' then
-        local ok, result = pcall(function()
-            if player.Functions and player.Functions.SetJob then
-                return player.Functions.SetJob(jobName, grade)
-            end
-
-            return exports.qbx_core:SetJob(src, jobName, grade)
-        end)
-
-        if ok then
-            return result ~= false
-        end
-    end
-
-    if GetResourceState('qb-core') == 'started' then
-        if player.Functions and player.Functions.SetJob then
-            local ok, result = pcall(function()
-                return player.Functions.SetJob(jobName, grade)
-            end)
-
-            if ok then
-                return result ~= false
-            end
-        end
-    end
-
-    return false
-end
-
 local function FindIdentityService(serviceId)
     for _, service in ipairs(Config.Identity or {}) do
         if service.id == serviceId and service.enabled then
@@ -316,16 +281,6 @@ local function FindPermitService(serviceId)
     for _, service in ipairs(Config.Permits or {}) do
         if service.id == serviceId and service.enabled then
             return service
-        end
-    end
-
-    return nil
-end
-
-local function FindJob(jobName)
-    for _, job in ipairs(Config.Jobs or {}) do
-        if job.name == jobName then
-            return job
         end
     end
 
@@ -384,23 +339,6 @@ local function BuildPermitStatus(src)
     return result
 end
 
-local function BuildJobs()
-    local result = {}
-
-    for _, job in ipairs(Config.Jobs or {}) do
-        result[#result + 1] = {
-            name = job.name,
-            grade = job.grade or 0,
-            label = job.label,
-            description = job.description,
-            salary = job.salary or 0,
-            icon = job.icon or 'briefcase'
-        }
-    end
-
-    return result
-end
-
 lib.callback.register('distortionz_cityhall:server:getCityHallData', function(src)
     local player = GetPlayer(src)
 
@@ -419,6 +357,11 @@ lib.callback.register('distortionz_cityhall:server:getCityHallData', function(sr
 
         text = Config.Text,
 
+        meta = {
+            version = Config.CurrentVersion,
+            repo = Config.Repo
+        },
+
         citizen = {
             name = GetCharName(src),
             citizenId = GetCitizenId(src),
@@ -428,7 +371,6 @@ lib.callback.register('distortionz_cityhall:server:getCityHallData', function(sr
 
         identity = BuildIdentityStatus(src),
         permits = BuildPermitStatus(src),
-        jobs = BuildJobs(),
 
         records = Config.Records,
 
@@ -527,44 +469,6 @@ lib.callback.register('distortionz_cityhall:server:purchaseService', function(sr
         success = true,
         status = 'success',
         message = ('%s issued successfully. Paid with %s.'):format(service.label, paidAccount)
-    }
-end)
-
-lib.callback.register('distortionz_cityhall:server:selectJob', function(src, data)
-    if not data or not data.jobName then
-        return {
-            success = false,
-            status = 'error',
-            message = 'Invalid employment request.'
-        }
-    end
-
-    local job = FindJob(tostring(data.jobName))
-
-    if not job then
-        return {
-            success = false,
-            status = 'error',
-            message = 'This job is unavailable.'
-        }
-    end
-
-    local success = SetPlayerJob(src, job.name, job.grade or 0)
-
-    if not success then
-        return {
-            success = false,
-            status = 'error',
-            message = 'Unable to update employment.'
-        }
-    end
-
-    DebugPrint(('Source %s selected job %s grade %s'):format(src, job.name, job.grade or 0))
-
-    return {
-        success = true,
-        status = 'success',
-        message = ('You are now employed as %s.'):format(job.label)
     }
 end)
 

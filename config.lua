@@ -3,7 +3,9 @@ Config = {}
 Config.Debug = false
 
 Config.ResourceName = 'distortionz_cityhall'
-Config.CurrentVersion = '1.0.0'
+Config.CurrentVersion = '1.0.2'
+
+Config.Repo = 'https://github.com/Distortionzz/Distortionz_Cityhall'
 
 Config.VersionCheck = {
     enabled = true,
@@ -120,65 +122,6 @@ Config.Permits = {
     }
 }
 
-Config.Jobs = {
-    {
-        name = 'unemployed',
-        grade = 0,
-        label = 'Unemployed',
-        description = 'No formal employment. Useful if you want to leave your current starter job.',
-        salary = 0,
-        icon = 'user'
-    },
-    {
-        name = 'garbage',
-        grade = 0,
-        label = 'Garbage Collector',
-        description = 'Collect trash around the city and earn steady pay.',
-        salary = 75,
-        icon = 'trash'
-    },
-    {
-        name = 'taxi',
-        grade = 0,
-        label = 'Taxi Driver',
-        description = 'Transport citizens around the city.',
-        salary = 90,
-        icon = 'taxi'
-    },
-    {
-        name = 'bus',
-        grade = 0,
-        label = 'Bus Driver',
-        description = 'Run public routes and keep the city moving.',
-        salary = 85,
-        icon = 'bus'
-    },
-    {
-        name = 'tow',
-        grade = 0,
-        label = 'Tow Operator',
-        description = 'Tow abandoned or broken vehicles.',
-        salary = 95,
-        icon = 'truck-pickup'
-    },
-    {
-        name = 'delivery',
-        grade = 0,
-        label = 'Delivery Driver',
-        description = 'Handle legal package delivery work across Los Santos.',
-        salary = 80,
-        icon = 'box'
-    },
-    {
-        name = 'hotdog',
-        grade = 0,
-        label = 'Hotdog Vendor',
-        description = 'Run food stand work and serve citizens.',
-        salary = 70,
-        icon = 'utensils'
-    }
-}
-
 Config.Records = {
     enabled = true,
 
@@ -192,11 +135,6 @@ Config.Records = {
             label = 'License Status',
             description = 'View active and inactive licenses.',
             icon = 'clipboard-check'
-        },
-        {
-            label = 'Employment Record',
-            description = 'Review your current employment status.',
-            icon = 'briefcase'
         }
     }
 }

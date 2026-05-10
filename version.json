@@ -1,6 +1,6 @@
 {
     "resource": "distortionz_cityhall",
-    "version": "1.0.0",
-    "changelog": "Initial release. Premium government City Hall UI with identity services, licenses, permits, starter job selection, citizen records, protected City Hall ped, ox_target support, Qbox/QBCore compatibility, and Distortionz Notify support.",
+    "version": "1.0.2",
+    "changelog": "v1.0.2 — Added README.md with overview, features, dependencies, installation, and credits. Standardized GitHub repo metadata (badges, dynamic version pull, MIT license, Qbox required). v1.0.1 — Removed Employment service. Players now get jobs at actual work locations instead of City Hall. Stripped the Employment tab, jobsGrid, selectJob client/server callbacks, Config.Jobs, BuildJobs/FindJob/SetPlayerJob helpers, and the Employment Record entry from Records. The header still displays the player's current job as informational status only. v1.0.0 — Initial release.",
     "download": "https://github.com/Distortionzz/Distortionz_Cityhall"
 }
